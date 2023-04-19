@@ -65,9 +65,13 @@ public class AdminClass extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         String key = class_name.getText().toString();
                         String value = class_name.getText().toString();
-                        reference = FirebaseDatabase.getInstance().getReference();
-                        DatabaseReference bref = reference.child("Department").child(key);
-                        bref.setValue(value);
+                        if(!value.isEmpty()) {
+                            reference = FirebaseDatabase.getInstance().getReference();
+                            DatabaseReference bref = reference.child("Department").child(key);
+                            bref.setValue(value);
+                        } else {
+                            class_name.setError("Class Name Cannot be Empty");
+                        }
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
